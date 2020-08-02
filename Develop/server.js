@@ -15,11 +15,9 @@ app.use(express.json());
 app.use(express.static('public'));
 
 
-// // Require Routes Set up
-// require("./routes/htmlRoutes")(app);
 
+// Get Requests
 
-// --------------------------------
 app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, "./public/notes.html"));
 });
@@ -33,12 +31,7 @@ app.get('*', (req, res) => {
 });
 
 
-
-app.get("/api/notes/:id", (req, res) => {
-    let savedNotes = JSON.parse(fs / fs.readFileSync("./db/db.json", "utf8"));
-    res.json(savedNotes[Number(req.params.id)]);
-
-});
+// Post Request
 
 app.post("/api/notes", (req, res) => {
     let savedNotes = JSON.parse(fs.readFileSync("./db/db/json", "utf8"));
@@ -50,6 +43,15 @@ app.post("/api/notes", (req, res) => {
     fs.writeFileSync("./db/db.json", JSON.stringify(savedNotes));
     console.log("Note saved to db.json. Content: ", newNote);
     res.json(savedNotes);
+});
+
+
+//Delete Request
+
+app.get("/api/notes/:id", (req, res) => {
+    let savedNotes = JSON.parse(fs / fs.readFileSync("./db/db.json", "utf8"));
+    res.json(savedNotes[Number(req.params.id)]);
+
 });
 
 app.delete("/api/notes/:id", (req, res) => {
@@ -71,12 +73,6 @@ app.delete("/api/notes/:id", (req, res) => {
     res.json(savedNotes);
 
 });
-
-
-
-// --------------------------------
-
-
 
 
 //Listener
