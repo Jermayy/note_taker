@@ -15,7 +15,7 @@ app.use(express.static(__dirname));
 
 
 // Require Routes Set up
-require(__dirname + "/routes/htmlRoutes")(app);
+require("./routes/htmlRoutes")(app);
 
 //Listener
 app.listen(PORT, () => {
