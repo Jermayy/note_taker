@@ -2,6 +2,7 @@
 // DEPENDENCIES
 // We need to include the path package to get the correct file path for our html
 // ===============================================================================
+const fs = require("fs");
 const path = require("path");
 
 
@@ -16,13 +17,42 @@ module.exports = (app) => {
     // ---------------------------------------------------------------------------
 
 
+    fs.readFile(__dirname + "/db/db.json", "utf8", (err, data) => {
 
-    app.get("/notes", (req, res) => {
-        res.sendFile(path.join(__dirname, "../public/assets/notes.html"));
+        if (err) throw err;
+
+        let notes = JSON.parse(data);
+
+        app.get("/api/notes", (req, res) => {
+            res.JSON(notes);
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // If no matching route is found default to home
+        app.get("*", (req, res) => {
+            res.sendFile(path.join(__dirname, "../public/assets/index.html"));
+        });
+
     });
 
-    // If no matching route is found default to home
-    app.get("*", (req, res) => {
-        res.sendFile(path.join(__dirname, "../public/assets/index.html"));
-    });
+
+
+
 };
