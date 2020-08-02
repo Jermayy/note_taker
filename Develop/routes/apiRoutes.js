@@ -1,0 +1,1 @@
+const notesArray = require(__dirname + "../notes");
