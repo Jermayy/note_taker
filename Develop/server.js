@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3713;
 //Data Parsing Set up
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(__dirname));
+app.use(express.static('public'));
 
 
 // // Require Routes Set up
@@ -34,23 +34,25 @@ app.get('*', (req, res) => {
 
 
 
-app.get("/api/notes/:id", function(req, res) {
+app.get("/api/notes/:id", (req, res) => {
     let savedNotes = JSON.parse(fs / fs.readFileSync("./db/db.json", "utf8"));
     res.json(savedNotes[Number(req.params.id)]);
 
 });
 
-app.post("/api/notes", function(req, res) {
+app.post("/api/notes", (req, res) => {
     let savedNotes = JSON.parse(fs.readFileSync("./db/db/json", "utf8"));
     let newNote = req.body;
     let newID = (savedNotes.length).toString();
     newNote.id = newID;
     savedNotes.push(newNote);
 
-
+    fs.writeFileSync("./db/db.json", JSON.stringify(savedNotes));
+    console.log("Note saved to db.json. Content: ", newNote);
+    res.json(savedNotes);
 });
 
-app.delete("/api/notes/:id", function(req, res) {
+app.delete("/api/notes/:id", (req, res) => {
     let savedNotes = JSON.parse(fs.readFileSync("./db/db/json", "utf8"));
     let noteID = req.params.id;
     let resetID = 0;
@@ -59,15 +61,14 @@ app.delete("/api/notes/:id", function(req, res) {
         return currNote.id != noteID;
     })
 
-    for (currNote of savedNotes) {
-        currNote.id = resetID.toString();
+    for (currentNote of savedNotes) {
+        currentNote.id = resetID.toString();
         resetID++;
     }
 
-    fs.writeFileSync("./db/db.json", JSON.stringify(savedNotes));
-    console.log("Note saved to db.json. Content: ", newNote);
-    res.json(savedNotes);
 
+    fs.writeFileSync("./db/db.json", JSON.stringify(savedNotes));
+    res.json(savedNotes);
 
 });
 
