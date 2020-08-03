@@ -34,7 +34,7 @@ app.get('*', (req, res) => {
 // Post Request
 
 app.post("/api/notes", (req, res) => {
-    let savedNotes = JSON.parse(fs.readFileSync("./db/db/json", "utf8"));
+    let savedNotes = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
     let newNote = req.body;
     let newID = (savedNotes.length).toString();
     newNote.id = newID;
