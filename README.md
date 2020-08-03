@@ -18,7 +18,7 @@ This application was developed using the following:
  * CSS
  * Javascript
  * Node.js
- *Express.js
+ * Express.js
 
 ## Installation:
 
