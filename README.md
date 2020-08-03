@@ -27,13 +27,23 @@ No Installation required
 ## Usage:
 Deployed Application URL: https://afternoon-anchorage-54862.herokuapp.com/
 
+
+1. Users will see the following screen upon launch of the application:
 ![](/screenshots/index.png)
 
 
 
+2. Pressing the 'Get Started' pages brings the user to the Notes page where user will be able to add a Note Title and note text in the provided areas.
 
-![](/screenshots/notes.png)
+Alternatively they can also press the pencil button on the top right of the screen to begin writing a new note.
 
+![](/screenshots/notes1.png)
+
+
+3. Once user has completed writing their note, pressing the save button in the top right of the window will save the note to the application and append a new item to the left column.
+
+The red delete button allows the user to clear any notes they do not need anymore.
+![](/screenshots/notes2.png)
 
 ## License Details:  
 
